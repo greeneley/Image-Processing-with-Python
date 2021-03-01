@@ -1,7 +1,7 @@
 """
- * Python script to demonstrate simple thresholding.
+ * Python script to practice simple thresholding.
  *
- * usage: python Threshold.py <filename> <sigma> <threshold>
+ * usage: python ThresholdPractice.py <filename> <sigma>
 """
 import sys
 import numpy as np
@@ -9,7 +9,6 @@ import skimage.color
 import skimage.io
 import skimage.filters
 import skimage.viewer
-import skimage.util.dtype
 
 # get filename, kernel size, and threshold value from command line
 filename = sys.argv[1]
@@ -23,16 +22,15 @@ viewer.show()
 
 # blur and grayscale before thresholding
 blur = skimage.color.rgb2gray(image)
-blur = skimage.filters.gaussian(blur, sigma=sigma)
+blur = skimage.filters.gaussian(image, sigma=sigma)
 
 # perform inverse binary thresholding
+# MODIFY CODE HERE!
 t = skimage.filters.threshold_otsu(blur)
 mask = blur > t
 
-# display the mask image
 viewer = skimage.viewer.ImageViewer(mask)
 viewer.show()
-
 # use the mask to select the "interesting" part of the image
 sel = np.zeros_like(image)
 sel[mask] = image[mask]

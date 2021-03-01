@@ -16,7 +16,7 @@ sigma = float(sys.argv[2])
 t = float(sys.argv[3])
 
 # read and display the original image
-image = skimage.io.imread(fname=filename)
+image = skimage.io.imread(fname=filename,as_gray=True)
 viewer = skimage.viewer.ImageViewer(image)
 viewer.show()
 
@@ -26,8 +26,8 @@ blur = skimage.filters.gaussian(image, sigma=sigma)
 
 # perform inverse binary thresholding
 # MODIFY CODE HERE!
-t = skimage.filters.thresh_otsu(blur)
-mask = blur < t
+# t = skimage.filters.thresh_otsu(blur)
+mask = blur > t
 
 # use the mask to select the "interesting" part of the image
 sel = np.zeros_like(image)
